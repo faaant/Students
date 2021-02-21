@@ -1,7 +1,8 @@
 #include "Func.h"
-
-
 int main()
 {
-    return 0;
+    setlocale(LC_ALL, "Ukrainian");
+    vector<TStudent> Student;
+    Read_from_file(Student);
+
 }
