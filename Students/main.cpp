@@ -1,6 +1,5 @@
 #include "Func.h"
 
-using namespace std;
 
 int main()
 {
