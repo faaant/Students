@@ -80,6 +80,7 @@ void Read_from_file(vector<TStudent> &Student)
                 student.grade[j]=stoi(reader);
             }
             getline(file,reader);
+            student.averageG=Average(student.grade);
             if(reader=="TRUE")
                 student.contract=true;
             else
