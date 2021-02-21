@@ -1,8 +1,9 @@
 #include "Func.h"
 
-using namespace std;
-
 int main()
 {
-    return 0;
+
+    vector<TStudent> Student;
+    Read_from_file(Student);
+
 }
