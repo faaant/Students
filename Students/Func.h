@@ -6,3 +6,5 @@ struct TStundent
     bool contract;
     int averageG;
 };
+
+int Average (int*);
