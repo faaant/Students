@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <direct.h>
+#include <fstream>
 using namespace std;
 
 struct TStudent
@@ -15,3 +17,5 @@ struct TStudent
 int Average (int*);
 int minGrade (vector<TStudent>&);
 int* sortM (int*, int);
+void Read_from_file(vector<TStudent> &);
+
