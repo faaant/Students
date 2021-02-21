@@ -7,11 +7,11 @@ using namespace std;
 struct TStudent
 {
     string name;
-    int grade[5];
+    double grade[5];
     bool contract;
-    int averageG;
+    double averageG;
 };
 
-int Average (int*);
-int minGrade (vector<TStudent>&);
-int* sortM (int*, int);
+double Average (int*);
+double minGrade (vector<TStudent>&);
+double* sortM (int*, int);
