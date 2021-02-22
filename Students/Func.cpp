@@ -1,14 +1,16 @@
 #include "Func.h"
 
 
-double Average (double* grade)
+double Average (int* grade)
 {
     double sum=0;
     for (int i=0; i<5;i++)
     {
         sum=sum+grade[i];
     }
-    return sum/5;
+    sum=round((sum/5)*1000);
+    sum=sum/1000;
+    return sum;
 }
 
 double minGrade (vector<TStudent>& students)
@@ -19,10 +21,10 @@ double minGrade (vector<TStudent>& students)
         AvGrades[i]=students[i].averageG;
     }
     sortM(AvGrades,students.size());
-    return AvGrades[int(floor(students.size()*0.4))];
+    return AvGrades[int(floor(students.size()*0.4))-1];
 }
 
-double* sortM (double* AvGrade, int n)
+void sortM (double* AvGrade, int n)
 {
     for (int i=0;i<n;i++)
     {
@@ -30,25 +32,26 @@ double* sortM (double* AvGrade, int n)
         {
             if (AvGrade[i]<AvGrade[j])
             {
-                double buf = AvGrade[i];
+                int buf = AvGrade[i];
                 AvGrade[i] = AvGrade[j];
                 AvGrade[j] = buf;
             }
         }
     }
-    return AvGrade;
 }
 
-void Read_from_file(vector<TStudent> &Student)
+void Read_from_file(vector<TStudent> &Student, string &name_direct_return)
 {
     int number_of_students;
     string name_of_directory,
            name,
            name_of_file,
            reader;
+    string end_of_line;
     TStudent student;
     cout<<"Enter the name of directory: ";
     getline(cin,name_of_directory);
+    name_direct_return=name_of_directory;
     char way_to_files[name_of_directory.length()+5];
     for (int i=0;i<name_of_directory.length();i++)
     {
@@ -65,13 +68,14 @@ void Read_from_file(vector<TStudent> &Student)
     intptr_t handle = _findfirst(way_to_files, &data);
     do
     {
-
         name=data.name;
         name_of_file=name_of_directory+"/"+name;
         ifstream file (name_of_file);
-        file >> number_of_students;
+        file>>number_of_students;
+        getline(file,end_of_line);
         for(int i=0; i<number_of_students;i++)
         {
+
             getline(file,reader,',');
             student.name=reader;
             for(int j=0; j<5;j++)
@@ -95,5 +99,35 @@ void Read_from_file(vector<TStudent> &Student)
     _findclose(handle);
 }
 
+void sort_Students(vector<TStudent> &Students)
+{
+    TStudent Buf;
+    for(int i=0;i<Students.size();i++)
+    {
+        for(int j=i; j<Students.size();j++)
+        {
+            if(Students[i].averageG<Students[j].averageG)
+            {
+                Buf=Students[i];
+                Students[i]=Students[j];
+                Students[j]=Buf;
+            }
+        }
+    }
 
+}
+
+void Output_rating(vector<TStudent> &Students, string &name_of_directory)
+{
+    ofstream file(name_of_directory+"/rating.csv");
+    for(int i=0; i<Students.size();i++)
+    {
+        if(i<floor(Students.size()*0.4))
+        {
+            file<<Students[i].name<<","<<Students[i].averageG<<endl;
+        }
+
+    }
+    file.close();
+}
 

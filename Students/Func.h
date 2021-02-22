@@ -9,13 +9,15 @@ using namespace std;
 struct TStudent
 {
     string name;
-    double grade[5];
+    int grade[5];
     bool contract;
     double averageG;
 };
 
-double Average (double*);
+double Average (int*);
 double minGrade (vector<TStudent>&);
-double* sortM (double*, int);
-void Read_from_file(vector<TStudent> &);
+void sortM (double*, int);
+void Read_from_file(vector<TStudent> &,string &);
+void sort_Students(vector<TStudent> &);
+void Output_rating(vector<TStudent> &,string &);
 
