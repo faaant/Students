@@ -19,7 +19,7 @@ double minGrade (vector<TStudent>& students)
         AvGrades[i]=students[i].averageG;
     }
     sortM(AvGrades,students.size());
-    return AvGrades[floor(students.size()*0.4)];
+    return AvGrades[int(floor(students.size()*0.4))];
 }
 
 double* sortM (double* AvGrade, int n)

@@ -14,8 +14,8 @@ struct TStudent
     double averageG;
 };
 
-double Average (int*);
+double Average (double*);
 double minGrade (vector<TStudent>&);
-double* sortM (int*, int);
+double* sortM (double*, int);
 void Read_from_file(vector<TStudent> &);
 
