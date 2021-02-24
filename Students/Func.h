@@ -15,9 +15,9 @@ struct TStudent
 };
 
 double Average (int*);
-double minGrade (vector<TStudent>&, int);
+double minGrade (vector<TStudent>&, int,int);
 void sortM (double*, int);
-void Read_from_file(vector<TStudent> &,string &,int);
+void Read_from_file(vector<TStudent> &,string &,int,int &);
 void sort_Students(vector<TStudent> &);
-void Output_rating(vector<TStudent> &,string &,int);
+void Output_rating(vector<TStudent> &,string &,int,int );
 

@@ -13,15 +13,22 @@ double Average (int* grade)
     return sum;
 }
 
-double minGrade (vector<TStudent>& students, int percent)
+double minGrade (vector<TStudent>& students, int percent, int derjavnyky)
 {
+    int num;
+    if (students.size()<floor(derjavnyky*double(percent)/100))
+    {
+        num =students.size();
+    }
+    else
+        num=floor(derjavnyky*double(percent)/100);
     double AvGrades[students.size()];
     for (int i=0;i<students.size();i++)
     {
         AvGrades[i]=students[i].averageG;
     }
     sortM(AvGrades,students.size());
-    return AvGrades[int(floor(students.size()*double(percent)/100))-1];
+    return AvGrades[num-1];
 }
 
 void sortM (double* AvGrade, int n)
@@ -40,7 +47,7 @@ void sortM (double* AvGrade, int n)
     }
 }
 
-void Read_from_file(vector<TStudent> &Student, string &name_direct_return, int mark)
+void Read_from_file(vector<TStudent> &Student, string &name_direct_return, int mark,int &derjavnyky)
 {
     int number_of_students;
     string name_of_directory,
@@ -98,6 +105,7 @@ void Read_from_file(vector<TStudent> &Student, string &name_direct_return, int m
             else
             {
                 student.contract=false;
+                derjavnyky++;
             }
             if (stypendia==true)
             {
@@ -128,15 +136,19 @@ void sort_Students(vector<TStudent> &Students)
 
 }
 
-void Output_rating(vector<TStudent> &Students, string &name_of_directory,int percent)
+void Output_rating(vector<TStudent> &Students, string &name_of_directory,int percent, int derjavnyky)
 {
     ofstream file(name_of_directory+"/rating.csv");
-    for(int i=0; i<Students.size();i++)
+    int num;
+    if (Students.size()<floor(derjavnyky*double(percent)/100))
     {
-        if(i<floor(Students.size()*double(percent)/100))
-        {
+        num =Students.size();
+    }
+    else
+        num=floor(derjavnyky*double(percent)/100);
+    for(int i=0; i<num;i++)
+    {
             file<<Students[i].name<<","<<Students[i].averageG<<endl;
-        }
 
     }
     file.close();
