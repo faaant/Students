@@ -83,7 +83,7 @@ void Read_from_file(vector<TStudent> &Student, string &name_direct_return, int m
             {
                 getline(file,reader,',');
                 student.grade[j]=stoi(reader);
-                if (student.grade[j]<mark)
+                if (student.grade[j]<=mark)
                 {
                     stypendia=false;
                 }
