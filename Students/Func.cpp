@@ -13,7 +13,7 @@ double Average (int* grade)
     return sum;
 }
 
-double minGrade (vector<TStudent>& students)
+double minGrade (vector<TStudent>& students, int percent)
 {
     double AvGrades[students.size()];
     for (int i=0;i<students.size();i++)
@@ -21,7 +21,7 @@ double minGrade (vector<TStudent>& students)
         AvGrades[i]=students[i].averageG;
     }
     sortM(AvGrades,students.size());
-    return AvGrades[int(floor(students.size()*0.4))-1];
+    return AvGrades[int(floor(students.size()*double(percent)/100))-1];
 }
 
 void sortM (double* AvGrade, int n)
@@ -40,7 +40,7 @@ void sortM (double* AvGrade, int n)
     }
 }
 
-void Read_from_file(vector<TStudent> &Student, string &name_direct_return)
+void Read_from_file(vector<TStudent> &Student, string &name_direct_return, int mark)
 {
     int number_of_students;
     string name_of_directory,
@@ -48,6 +48,7 @@ void Read_from_file(vector<TStudent> &Student, string &name_direct_return)
            name_of_file,
            reader;
     string end_of_line;
+    bool stypendia;
     TStudent student;
     cout<<"Enter the name of directory: ";
     getline(cin,name_of_directory);
@@ -75,21 +76,31 @@ void Read_from_file(vector<TStudent> &Student, string &name_direct_return)
         getline(file,end_of_line);
         for(int i=0; i<number_of_students;i++)
         {
-
+            stypendia=true;
             getline(file,reader,',');
             student.name=reader;
             for(int j=0; j<5;j++)
             {
                 getline(file,reader,',');
                 student.grade[j]=stoi(reader);
+                if (student.grade[j]<mark)
+                {
+                    stypendia=false;
+                }
             }
             getline(file,reader);
             student.averageG=Average(student.grade);
             if(reader=="TRUE")
+            {
                 student.contract=true;
+                stypendia=false;
+            }
             else
             {
                 student.contract=false;
+            }
+            if (stypendia==true)
+            {
                 Student.push_back(student);
             }
         }
@@ -117,12 +128,12 @@ void sort_Students(vector<TStudent> &Students)
 
 }
 
-void Output_rating(vector<TStudent> &Students, string &name_of_directory)
+void Output_rating(vector<TStudent> &Students, string &name_of_directory,int percent)
 {
     ofstream file(name_of_directory+"/rating.csv");
     for(int i=0; i<Students.size();i++)
     {
-        if(i<floor(Students.size()*0.4))
+        if(i<floor(Students.size()*double(percent)/100))
         {
             file<<Students[i].name<<","<<Students[i].averageG<<endl;
         }
